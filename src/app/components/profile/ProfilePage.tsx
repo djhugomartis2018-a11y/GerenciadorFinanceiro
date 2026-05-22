@@ -91,7 +91,8 @@ export function ProfilePage() {
       setProfile({ ...profile, avatar_url: publicUrl });
       toast.success('Foto carregada! Clique em Salvar para confirmar.');
     } catch (error: any) {
-      toast.error('Erro ao carregar foto');
+      console.error('Erro no upload:', error);
+      toast.error('Erro ao carregar foto: ' + (error.message || 'Erro desconhecido'));
     } finally {
       setUpdating(false);
     }
