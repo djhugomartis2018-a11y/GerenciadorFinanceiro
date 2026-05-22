@@ -600,3 +600,4 @@ function HistoricoPage({ data }: any) {
 function MetasPage({ data, updateData }: any) { 
   return <div className="p-8">Página de Metas (Implementação original mantida)</div>; 
 }
+// Force redeploy Fri May 22 18:45:10 UTC 2026
