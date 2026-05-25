@@ -90,7 +90,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Button
                 onClick={onGetStarted}
-                className="bg-[#00ff41] text-black hover:bg-[#00dd33] font-black text-lg h-14 px-8 shadow-[0_0_40px_rgba(0,255,65,0.5)] transition-all duration-300 group"
+                className="bg-[#00ff41] text-white hover:bg-[#00dd33] font-black text-lg h-14 px-8 shadow-[0_0_40px_rgba(0,255,65,0.5)] transition-all duration-300 group"},{find:
               >
                 Começar Agora
                 <ArrowRight className="ml-2 group-hover:translate-x-2 transition-transform" size={24} />
@@ -274,7 +274,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
 
           <Button
             onClick={onGetStarted}
-            className="bg-[#00ff41] text-black hover:bg-[#00dd33] font-black text-xl h-16 px-12 shadow-[0_0_50px_rgba(0,255,65,0.6)] transition-all duration-300 group inline-flex items-center gap-3"
+            className="bg-[#00ff41] text-white hover:bg-[#00dd33] font-black text-xl h-16 px-12 shadow-[0_0_50px_rgba(0,255,65,0.6)] transition-all duration-300 group inline-flex items-center gap-3"
           >
             Acessar Agora
             <ArrowRight className="group-hover:translate-x-2 transition-transform" size={28} />
