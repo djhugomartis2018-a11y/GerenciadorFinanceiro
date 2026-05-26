@@ -80,11 +80,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
           <div className="text-center space-y-8">
             <div className="space-y-4">
               <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tighter leading-tight">
-                Controle Seu{" "}
-<span className="inline-block bg-gradient-to-r from-accent-purple to-accent-lime bg-clip-text text-transparent">
-  Dinheiro
-</span>{" "}
-com Precisão 
+                Controle Seu{" "}Dinheiro{" "}com Precisão
               </h2>
               <p className="text-xl text-text-dim max-w-2xl mx-auto leading-relaxed">
                 Gerencie suas finanças pessoais de forma inteligente. Dashboard completo, análises detalhadas e metas ao seu alcance.
