@@ -95,9 +95,6 @@ export function LoginPage({ onLoginSuccess }: LoginPageProps) {
           <div className="flex justify-center mb-4">
             <img src="/logobranca.svg" alt="NAVEX Finance" className="h-12 w-auto" />
           </div>
-          <CardTitle className="text-2xl font-bold text-center">
-            {isSignUp ? 'Criar Conta' : 'NAVEX FINANCE'}
-          </CardTitle>
           <CardDescription className="text-center text-text-dim">
             {isSignUp
               ? 'Preencha os dados para começar sua gestão financeira'
