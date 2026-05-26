@@ -41,13 +41,6 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
       description: 'Acesse seus dados de qualquer dispositivo com sincronização automática na nuvem.'
     }
   ];
-
-  const stats = [
-    { number: '100%', label: 'Responsivo' },
-    { number: '24/7', label: 'Disponível' },
-    { number: '∞', label: 'Meses' }
-  ];
-
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
       {/* Navigation */}
@@ -96,16 +89,6 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
               >
                 Conhecer Mais
               </Button>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-4 pt-8 border-t border-border/50">
-              {stats.map((stat, i) => (
-                <div key={i} className="space-y-2">
-                  <p className="text-3xl font-black bg-gradient-to-r from-accent-purple to-accent-lime bg-clip-text text-transparent">{stat.number}</p>
-                  <p className="text-sm text-text-dim">{stat.label}</p>
-                </div>
-              ))}
             </div>
           </div>
         </div>
