@@ -51,25 +51,19 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md border-b border-border z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-accent-purple to-accent-purple/70 rounded-xl flex items-center justify-center shadow-lg shadow-accent-purple/30">
-              <span className="text-white font-black text-lg">N</span>
-            </div>
-            <div>
-              <h1 className="text-lg font-black tracking-tighter leading-none bg-gradient-to-r from-accent-purple to-accent-lime bg-clip-text text-transparent">NAVEX FINANCE</h1>
-              <p className="text-[10px] text-text-dim font-bold uppercase tracking-widest">Gestão Inteligente</p>
-            </div>
-          </div>
-          <Button
-            onClick={onGetStarted}
-            className="bg-accent-purple hover:bg-accent-purple/90 text-white font-bold shadow-lg shadow-accent-purple/30 transition-all duration-300"
-          >
-            Acessar Agora
-          </Button>
-        </div>
-      </nav>
+<nav className="fixed top-0 w-full bg-background/80 backdrop-blur-md border-b border-border z-50">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+    <div className="flex items-center gap-3">
+      <img src="/logobranca.svg" alt="NAVEX Finance" className="h-10 w-auto" />
+    </div>
+    <Button
+      onClick={onGetStarted}
+      className="bg-accent-purple hover:bg-accent-purple/90 text-white font-bold shadow-lg shadow-accent-purple/30 transition-all duration-300"
+    >
+      Acessar Agora
+    </Button>
+  </div>
+</nav>
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
