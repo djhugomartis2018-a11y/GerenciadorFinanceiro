@@ -171,70 +171,120 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             </Button>
           </div>
 
-          {/* Dashboard Preview Mockup */}
-          <div className="relative mt-20 max-w-5xl mx-auto">
-            <div className="absolute inset-0 bg-accent-purple/20 blur-[100px] -z-10 rounded-full" />
-            <div className="rounded-2xl border border-white/10 bg-[#121212] overflow-hidden shadow-2xl">
-              {/* Fake UI Header */}
-              <div className="flex items-center justify-between p-4 border-b border-white/5 bg-white/[0.02]">
-                <div className="flex items-center gap-4">
-                  <div className="w-8 h-8 bg-accent-purple rounded-lg flex items-center justify-center">
-                    <span className="text-[10px] font-bold">Q</span>
-                  </div>
-                  <div className="h-8 w-40 bg-white/5 rounded-md" />
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-8 h-8 rounded-full bg-white/10" />
-                  <div className="h-4 w-20 bg-white/10 rounded-full" />
-                </div>
-              </div>
-              {/* Fake UI Body */}
-              <div className="p-8 grid grid-cols-12 gap-6 h-[400px]">
-                <div className="col-span-8 space-y-6">
-                  <div className="h-8 w-48 bg-white/10 rounded-lg" />
-                  <div className="grid grid-cols-4 gap-4">
-                    <div className="h-8 rounded-full bg-accent-purple" />
-                    <div className="h-8 rounded-full bg-white/5" />
-                    <div className="h-8 rounded-full bg-white/5" />
-                    <div className="h-8 rounded-full bg-white/5" />
-                  </div>
-                  <div className="h-full bg-white/[0.02] rounded-2xl border border-white/5 p-6">
-                    <div className="flex justify-between items-end h-full gap-4">
-                      {[40, 60, 45, 90, 65, 80, 55].map((h, i) => (
-                        <div key={i} className="flex-1 bg-white/5 rounded-t-lg relative group">
-                          <div 
-                            style={{ height: `${h}%` }} 
-                            className={`w-full rounded-t-lg transition-all ${i === 3 ? 'bg-accent-purple shadow-[0_0_20px_rgba(100,12,199,0.5)]' : 'bg-white/10'}`} 
-                          />
-                          {i === 3 && (
-                            <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-white rounded text-[10px] text-black font-bold">
-                              +$32.45
-                            </div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <div className="col-span-4 space-y-6">
-                  <div className="h-48 bg-accent-purple/10 rounded-2xl border border-accent-purple/20 p-6 flex flex-col justify-between">
-                    <div className="h-4 w-24 bg-white/20 rounded-full" />
-                    <div className="text-3xl font-bold">$456,000</div>
-                    <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden">
-                      <div className="h-full w-2/3 bg-accent-lime" />
-                    </div>
-                  </div>
-                  <div className="h-32 bg-white/[0.02] rounded-2xl border border-white/5 p-6">
-                    <div className="h-4 w-24 bg-white/10 rounded-full mb-4" />
-                    <div className="space-y-2">
-                      <div className="h-2 w-full bg-white/5 rounded-full" />
-                      <div className="h-2 w-2/3 bg-white/5 rounded-full" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+	          {/* Dashboard Preview Mockup */}
+	          <div className="relative mt-20 max-w-6xl mx-auto">
+	            <div className="absolute inset-0 bg-accent-purple/10 blur-[120px] -z-10 rounded-full" />
+	            <div className="rounded-2xl border border-white/5 bg-[#0d0d0d] overflow-hidden shadow-2xl flex h-[550px]">
+	              {/* Sidebar Mockup */}
+	              <div className="w-64 border-r border-white/5 bg-[#141414] p-6 flex flex-col gap-8 hidden md:flex">
+	                <div className="flex flex-col items-center gap-4">
+	                  <img src="/logobranca.svg" alt="Logo" className="w-24 h-24 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]" />
+	                  <div className="h-px w-full bg-white/5" />
+	                </div>
+	                <div className="space-y-4">
+	                  <div className="text-[10px] font-black text-white/30 tracking-widest uppercase">Menu Principal</div>
+	                  <div className="space-y-1">
+	                    <div className="flex items-center gap-3 p-2 rounded-lg bg-white/5 text-accent-purple">
+	                      <LayoutGrid size={18} />
+	                      <span className="text-xs font-bold">Painel Geral</span>
+	                    </div>
+	                    <div className="flex items-center gap-3 p-2 rounded-lg text-white/40">
+	                      <TrendingUp size={18} />
+	                      <span className="text-xs font-bold">Análises</span>
+	                    </div>
+	                    <div className="flex items-center gap-3 p-2 rounded-lg text-white/40">
+	                      <Target size={18} />
+	                      <span className="text-xs font-bold">Minhas Metas</span>
+	                    </div>
+	                  </div>
+	                </div>
+	                <div className="mt-auto space-y-3">
+	                  <div className="h-10 bg-white/5 border border-white/5 rounded-xl flex items-center px-3 text-[10px] text-white/20 font-medium">
+	                    Novo mês (Ex: Jul/25)
+	                  </div>
+	                  <div className="flex items-center gap-3 p-2 rounded-xl bg-white/[0.02] border border-white/5">
+	                    <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center">
+	                      <User size={14} className="text-white/40" />
+	                    </div>
+	                    <div className="flex-1 min-w-0">
+	                      <div className="h-2 w-16 bg-white/20 rounded-full mb-1" />
+	                      <div className="h-1.5 w-24 bg-white/10 rounded-full" />
+	                    </div>
+	                  </div>
+	                </div>
+	              </div>
+
+	              {/* Main Content Mockup */}
+	              <div className="flex-1 bg-[#0d0d0d] p-8 overflow-hidden">
+	                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+	                  {[
+	                    { label: 'Total Recebido', val: 'R$ 12.450,00', color: 'text-blue-400', icon: ArrowUpCircle },
+	                    { label: 'Total Pago', val: 'R$ 5.820,00', color: 'text-red-400', icon: ArrowDownCircle },
+	                    { label: 'Saldo Acumulado', val: 'R$ 6.630,00', color: 'text-accent-purple', icon: Wallet },
+	                    { label: 'Último Mês', val: 'R$ 1.200,00', color: 'text-white/40', icon: Calendar }
+	                  ].map((stat, i) => (
+	                    <div key={i} className="bg-[#1a1a1a] border border-white/5 p-4 rounded-2xl">
+	                      <div className="flex justify-between items-start mb-3">
+	                        <div className="p-1.5 rounded-lg bg-white/5">
+	                          <stat.icon size={16} className={stat.color} />
+	                        </div>
+	                      </div>
+	                      <div className="text-[8px] font-black text-white/30 uppercase tracking-widest mb-1">{stat.label}</div>
+	                      <div className={`text-sm font-black ${stat.color}`}>{stat.val}</div>
+	                    </div>
+	                  ))}
+	                </div>
+
+	                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+	                  <div className="lg:col-span-2 bg-[#1a1a1a] border border-white/5 rounded-2xl p-6">
+	                    <div className="flex justify-between items-center mb-6">
+	                      <div className="text-xs font-bold">Evolução Financeira</div>
+	                      <div className="flex gap-3 text-[8px] font-bold">
+	                        <div className="flex items-center gap-1"><div className="w-1.5 h-1.5 rounded-full bg-accent-purple" /> ENTRADAS</div>
+	                        <div className="flex items-center gap-1"><div className="w-1.5 h-1.5 rounded-full bg-red-500" /> SAÍDAS</div>
+	                      </div>
+	                    </div>
+	                    <div className="h-48 flex items-end gap-2 px-2">
+	                      {[30, 45, 35, 60, 40, 75, 50, 85, 65, 90, 70, 95].map((h, i) => (
+	                        <div key={i} className="flex-1 flex flex-col gap-1 items-center">
+	                          <div style={{ height: `${h}%` }} className={`w-full rounded-t-sm ${i % 2 === 0 ? 'bg-accent-purple/40' : 'bg-red-500/20'}`} />
+	                        </div>
+	                      ))}
+	                    </div>
+	                  </div>
+	                  <div className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-6">
+	                    <div className="text-xs font-bold mb-6">Meses Recentes</div>
+	                    <div className="space-y-3">
+	                      {['Maio/2024', 'Abril/2024', 'Março/2024'].map((m, i) => (
+	                        <div key={i} className="flex items-center justify-between p-3 rounded-xl bg-[#0d0d0d] border border-white/5">
+	                          <div className="text-[10px] font-bold">{m}</div>
+	                          <ChevronRight size={12} className="text-white/20" />
+	                        </div>
+	                      ))}
+	                    </div>
+	                  </div>
+	                </div>
+
+	                <div className="mt-6 bg-[#1a1a1a] border border-white/5 rounded-2xl overflow-hidden">
+	                  <div className="px-6 py-4 border-b border-white/5 bg-white/[0.02] flex items-center gap-2">
+	                    <div className="w-1.5 h-1.5 rounded-full bg-accent-purple animate-pulse" />
+	                    <div className="text-[10px] font-black uppercase tracking-widest">Contas Pendentes</div>
+	                  </div>
+	                  <div className="p-4 space-y-3">
+	                    {[
+	                      { d: 'Aluguel / Financiamento', v: 'R$ 1.200,00', s: false },
+	                      { d: 'Energia Elétrica', v: 'R$ 245,50', s: true }
+	                    ].map((item, i) => (
+	                      <div key={i} className="flex items-center justify-between text-[10px] opacity-60">
+	                        <div className={item.s ? 'line-through' : ''}>{item.d}</div>
+	                        <div className="font-bold">{item.v}</div>
+	                      </div>
+	                    ))}
+	                  </div>
+	                </div>
+	              </div>
+	            </div>
+	          </div>
         </div>
       </section>
 
