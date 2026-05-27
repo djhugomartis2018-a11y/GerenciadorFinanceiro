@@ -310,12 +310,42 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
 
 	      {/* Pricing Section */}
 	      <section id="precos" className="relative py-32 px-4 bg-white/[0.01] border-y border-white/5">
-        <PricingSection 
-          plans={pricingPlans}
-          title="Preços Simples e Transparentes"
-          description="Escolha o plano ideal para o seu crescimento financeiro."
-        />
-      </section>
+	        <PricingSection 
+	          plans={pricingPlans}
+	          title="Preços Simples e Transparentes"
+	          description="Escolha o plano ideal para o seu crescimento financeiro."
+	        />
+	      </section>
+
+	      {/* How it Works Section */}
+	      <section id="como-funciona" className="py-32 px-4 relative overflow-hidden">
+	        <div className="max-w-6xl mx-auto">
+	          <div className="text-center mb-20">
+	            <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Como Funciona</h2>
+	            <p className="text-white/40 max-w-xl mx-auto font-medium">Três passos simples para você assumir o controle total da sua vida financeira.</p>
+	          </div>
+
+	          <div className="grid md:grid-cols-3 gap-8 relative">
+	            {/* Connection Line */}
+	            <div className="hidden md:block absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-y-1/2 z-0" />
+	            
+	            {[
+	              { step: '01', title: 'Criar Conta', desc: 'Cadastre-se em segundos com seu e-mail para começar sua jornada.', icon: User },
+	              { step: '02', title: 'Escolher Plano', desc: 'Selecione o plano que melhor se adapta às suas necessidades atuais.', icon: Target },
+	              { step: '03', title: 'Começar Organização', desc: 'Inicie seu controle financeiro com nossas ferramentas inteligentes.', icon: TrendingUp }
+	            ].map((item, i) => (
+	              <div key={i} className="relative z-10 bg-[#1a1a1a] border border-white/5 p-8 rounded-[2rem] hover:border-accent-purple/30 transition-all group">
+	                <div className="w-14 h-14 rounded-2xl bg-accent-purple/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+	                  <item.icon size={28} className="text-accent-purple" />
+	                </div>
+	                <div className="text-accent-purple text-xs font-black mb-2 tracking-widest uppercase">Passo {item.step}</div>
+	                <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+	                <p className="text-white/40 text-sm leading-relaxed">{item.desc}</p>
+	              </div>
+	            ))}
+	          </div>
+	        </div>
+	      </section>
 
       {/* CTA Section */}
       <section className="py-40 px-4 text-center relative overflow-hidden">
