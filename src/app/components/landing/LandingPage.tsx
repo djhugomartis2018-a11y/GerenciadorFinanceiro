@@ -377,7 +377,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
           </div>
         </div>
         <div className="max-w-6xl mx-auto mt-20 pt-8 border-t border-white/5 text-center text-white/20 text-xs font-medium">
-          <p>© 2024 NAVEX Finance. All rights reserved.</p>
+          <p>© 2026 NAVEX Finance. Todos os direitos reservados-Code Less.</p>
         </div>
       </footer>
     </div>
