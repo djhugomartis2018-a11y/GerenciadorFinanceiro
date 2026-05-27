@@ -239,7 +239,7 @@ export function PricingSection({
         ref={containerRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={() => setMousePosition({ x: null, y: null })}
-        className="relative w-full bg-background py-20 sm:py-24"
+        className="relative w-full bg-transparent py-20 sm:py-24"
       >
         <InteractiveStarfield
           mousePosition={mousePosition}
@@ -247,7 +247,7 @@ export function PricingSection({
         />
         <div className="relative z-10 max-w-6xl mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center space-y-4 mb-12">
-            <h2 className="text-4xl md:text-5xl font-black tracking-tighter text-foreground">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white">
               {title}
             </h2>
             <p className="text-muted-foreground text-lg">
@@ -382,10 +382,10 @@ function PricingCard({ plan, index }: { plan: PricingPlan; index: number }) {
         delay: index * 0.15,
       }}
       className={cn(
-        "rounded-2xl p-8 flex flex-col relative bg-background/70 backdrop-blur-sm",
+        "rounded-[2rem] p-8 flex flex-col relative bg-white/[0.02] backdrop-blur-md transition-all duration-500 hover:bg-white/[0.04]",
         plan.isPopular
-          ? "border-2 border-accent-lime shadow-[0_0_40px_rgba(218,235,68,0.2)]"
-          : "border border-border",
+          ? "border-2 border-accent-purple shadow-[0_0_40px_rgba(100,12,199,0.15)]"
+          : "border border-white/5",
       )}
     >
       {plan.isPopular && (
