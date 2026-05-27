@@ -128,7 +128,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
           </div>
           <button 
             onClick={onGetStarted}
-            className="flex items-center justify-center px-6 py-2 rounded-full bg-white text-black text-sm font-bold hover:bg-white/90 transition-all"
+            className="px-6 py-2 rounded-full bg-white text-black text-sm font-bold hover:bg-white/90 transition-all"
           >
             Entrar
           </button>
