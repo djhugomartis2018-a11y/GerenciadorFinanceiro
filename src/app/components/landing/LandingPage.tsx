@@ -122,18 +122,18 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             <span className="text-sm font-bold tracking-tight">NAVEX Finance</span>
           </div>
           <div className="hidden md:flex items-center gap-6 text-sm font-medium text-white/60">
-            <a href="#" className="hover:text-white transition-colors">Home</a>
-            <a href="#" className="hover:text-white transition-colors">About</a>
-            <a href="#" className="hover:text-white transition-colors">Feature</a>
-            <a href="#" className="hover:text-white transition-colors">Pricing</a>
-            <a href="#" className="hover:text-white transition-colors">Integration</a>
+            <a href="#" className="hover:text-white transition-colors">Início</a>
+            <a href="#" className="hover:text-white transition-colors">Sobre</a>
+            <a href="#" className="hover:text-white transition-colors">Recursos</a>
+            <a href="#" className="hover:text-white transition-colors">Preços</a>
+            <a href="#" className="hover:text-white transition-colors">Integrações</a>
             <a href="#" className="hover:text-white transition-colors">Blog</a>
           </div>
           <button 
             onClick={onGetStarted}
             className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent-purple text-xs font-bold hover:bg-accent-purple/80 transition-all"
           >
-            Contact <ArrowRight size={14} />
+            Contato <ArrowRight size={14} />
           </button>
         </div>
       </nav>
@@ -346,21 +346,21 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             </p>
           </div>
           <div className="space-y-6">
-            <h4 className="font-bold text-sm uppercase tracking-widest text-accent-purple">Product</h4>
+            <h4 className="font-bold text-sm uppercase tracking-widest text-accent-purple">Produto</h4>
             <ul className="space-y-4 text-sm text-white/40">
-              <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Integrations</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Changelog</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Recursos</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Integrações</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Preços</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Novidades</a></li>
             </ul>
           </div>
           <div className="space-y-6">
-            <h4 className="font-bold text-sm uppercase tracking-widest text-accent-purple">Company</h4>
+            <h4 className="font-bold text-sm uppercase tracking-widest text-accent-purple">Empresa</h4>
             <ul className="space-y-4 text-sm text-white/40">
-              <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Sobre Nós</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Carreiras</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Política de Privacidade</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Termos de Serviço</a></li>
             </ul>
           </div>
           <div className="space-y-6">
@@ -368,7 +368,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             <div className="flex gap-2">
               <input 
                 type="email" 
-                placeholder="Email address" 
+                placeholder="Seu e-mail" 
                 className="bg-white/5 border border-white/10 rounded-full px-4 py-2 text-sm w-full focus:outline-none focus:border-accent-purple"
               />
               <button className="w-10 h-10 rounded-full bg-accent-purple flex items-center justify-center hover:bg-accent-purple/80 transition-all">

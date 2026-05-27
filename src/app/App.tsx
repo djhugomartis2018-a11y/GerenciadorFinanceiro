@@ -349,19 +349,19 @@ export default function App() {
                   <SidebarMenuItem>
                     <SidebarMenuButton isActive={currentPage === 'overview'} onClick={() => showPage('overview')}>
                       <LayoutGrid size={20} className={currentPage === 'overview' ? "text-accent-purple" : ""} />
-                      <span className="font-bold">Dashboard</span>
+                      <span className="font-bold">Painel Geral</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
                     <SidebarMenuButton isActive={currentPage === 'historico'} onClick={() => showPage('historico')}>
                       <TrendingUp size={20} className={currentPage === 'historico' ? "text-accent-purple" : ""} />
-                      <span className="font-bold">Análise</span>
+                      <span className="font-bold">Análises</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
                     <SidebarMenuButton isActive={currentPage === 'metas'} onClick={() => showPage('metas')}>
                       <Target size={20} className={currentPage === 'metas' ? "text-accent-purple" : ""} />
-                      <span className="font-bold">Objetivos</span>
+                      <span className="font-bold">Minhas Metas</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 </SidebarMenu>
@@ -435,10 +435,10 @@ export default function App() {
               <SidebarTrigger className="md:hidden" />
               <div>
                 <h2 className="text-sm font-black uppercase tracking-widest text-text-dark">
-                  {currentPage === 'overview' ? 'Dashboard' : 
+                  {currentPage === 'overview' ? 'Painel Geral' : 
                    currentPage === 'mes' ? `Planejamento · ${currentMonth}` :
                    currentPage === 'historico' ? 'Análise de Dados' :
-                   currentPage === 'metas' ? 'Meus Objetivos' : 'Perfil'}
+                   currentPage === 'metas' ? 'Minhas Metas' : 'Meu Perfil'}
                 </h2>
               </div>
             </div>
@@ -1002,7 +1002,7 @@ function MetasPage({ data, updateData }: any) {
   const addMeta = () => {
     updateData((d: AppData) => ({
       ...d,
-      metas: [...d.metas, { desc: 'Novo Objetivo', total: 0, guardei: 0 }]
+      metas: [...d.metas, { desc: 'Nova Meta', total: 0, guardei: 0 }]
     }));
   };
 
@@ -1024,9 +1024,9 @@ function MetasPage({ data, updateData }: any) {
   return (
     <div className="animate-fadeIn space-y-8">
       <div className="flex justify-between items-center">
-        <h3 className="text-2xl font-black tracking-tight">Objetivos Financeiros</h3>
+        <h3 className="text-2xl font-black tracking-tight">Metas Financeiras</h3>
         <Button onClick={addMeta} className="bg-accent-purple text-white hover:bg-accent-purple/90 font-bold shadow-[0_0_15px_rgba(124,58,237,0.3)]">
-          <Plus size={18} className="mr-2" /> Novo Objetivo
+          <Plus size={18} className="mr-2" /> Nova Meta
         </Button>
       </div>
       
