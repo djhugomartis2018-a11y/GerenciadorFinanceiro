@@ -330,8 +330,12 @@ export default function App() {
       <div className="flex w-full min-h-screen bg-background text-foreground selection:bg-accent-purple/30">
         <Sidebar className="border-r border-border" collapsible={isMobile ? "icon" : "none"}>
           <SidebarHeader className="px-6 py-8">
-            <div className="flex items-center justify-center w-full">
-              <img src="/logobranca.svg" alt="Logo" className="w-20 h-20" />
+            <div className="flex flex-col items-center justify-center w-full space-y-4">
+              <div className="relative">
+                <div className="absolute inset-0 bg-accent-purple/20 blur-2xl rounded-full" />
+                <img src="/logobranca.svg" alt="Logo" className="w-32 h-32 relative z-10 drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]" />
+              </div>
+              <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
             </div>
           </SidebarHeader>
 

@@ -117,8 +117,9 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center p-6">
         <div className="flex items-center gap-8 px-6 py-3 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
-          <div className="flex items-center">
-            <img src="/logobranca.svg" alt="NAVEX Finance" className="w-12 h-12" />
+          <div className="flex items-center relative group">
+            <div className="absolute inset-0 bg-white/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+            <img src="/logobranca.svg" alt="NAVEX Finance" className="w-20 h-20 relative z-10 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" />
           </div>
           <div className="hidden md:flex items-center gap-6 text-sm font-medium text-white/60">
             <a href="#" className="hover:text-white transition-colors">Início</a>
@@ -337,7 +338,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         <div className="max-w-6xl mx-auto grid md:grid-cols-4 gap-12">
           <div className="space-y-6">
             <div className="flex items-center">
-              <img src="/logobranca.svg" alt="NAVEX Finance" className="w-16 h-16" />
+              <img src="/logobranca.svg" alt="NAVEX Finance" className="w-24 h-24 drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]" />
             </div>
             <p className="text-white/40 text-sm leading-relaxed">
               Tornando a gestão financeira mais simples, inteligente e acessível para todos através da IA.
