@@ -12,30 +12,6 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
 
   const features = [
     {
-      icon: Layout,
-      title: 'Soluções com IA',
-      description: 'Gestão de tarefas impulsionada por IA para fluxos de trabalho simplificados e eficazes.',
-      highlight: 'IA Integrada'
-    },
-    {
-      icon: Globe,
-      title: 'Suporte Personalizado',
-      description: 'Muitas tarefas agora são automatizadas, permitindo que nossos usuários trabalhem de forma mais eficaz.',
-      highlight: 'Suporte 24/7'
-    },
-    {
-      icon: BarChart,
-      title: 'Integração de Dados',
-      description: 'Conecte facilmente seus cartões de crédito, empréstimos, investimentos e contas bancárias.',
-      highlight: 'Conexão Total'
-    },
-    {
-      icon: PlayCircle,
-      title: 'Automação Inteligente',
-      description: 'Aproveitando a IA para criar fluxos de trabalho que simplificam tarefas e aumentam a produtividade.',
-      highlight: 'Automação'
-    },
-    {
       icon: BarChart3,
       title: 'Visualização de Dados',
       description: 'Visualize e organize conjuntos de dados complexos sem esforço para insights mais claros e decisões rápidas.',
@@ -291,7 +267,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
 
 
       {/* Features Grid */}
-      <section className="py-32 px-4 relative">
+      <section id="recursos" className="py-32 px-4 relative">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-20 space-y-4">
             <div className="inline-block h-px w-12 bg-accent-purple mb-4" />
@@ -304,7 +280,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
