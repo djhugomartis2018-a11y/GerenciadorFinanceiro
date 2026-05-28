@@ -40,7 +40,14 @@ export function LoginPage({ onLoginSuccess }: LoginPageProps) {
           },
         });
 
-        if (error) throw error;
+        if (error) {
+          if (error.message.toLowerCase().includes('sending confirmation email') || error.message.toLowerCase().includes('error sending')) {
+            toast.error('Não foi possível enviar o e-mail de confirmação. Tente novamente em alguns minutos.');
+          } else {
+            throw error;
+          }
+          return;
+        }
 
         if (data.user && !data.session) {
           setEmailSent(true);
@@ -83,6 +90,8 @@ export function LoginPage({ onLoginSuccess }: LoginPageProps) {
       } else if (msg.includes('already registered') || msg.includes('User already registered')) {
         toast.error('Este e-mail já está cadastrado. Tente fazer login.');
         setIsSignUp(false);
+      } else if (msg.toLowerCase().includes('sending confirmation email') || msg.toLowerCase().includes('error sending')) {
+        toast.error('Não foi possível enviar o e-mail de confirmação. Tente novamente em alguns minutos.');
       } else {
         toast.error(msg || 'Erro na autenticação');
       }
