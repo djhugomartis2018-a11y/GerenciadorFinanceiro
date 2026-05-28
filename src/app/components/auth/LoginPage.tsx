@@ -13,8 +13,10 @@ interface LoginPageProps {
 export function LoginPage({ onLoginSuccess }: LoginPageProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,11 +24,16 @@ export function LoginPage({ onLoginSuccess }: LoginPageProps) {
 
     try {
       if (isSignUp) {
+        if (password !== confirmPassword) {
+          toast.error('As senhas não coincidem. Verifique e tente novamente.');
+          setLoading(false);
+          return;
+        }
+
         const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: {
-            emailRedirectTo: undefined,
             data: {
               full_name: '',
             },
@@ -35,12 +42,11 @@ export function LoginPage({ onLoginSuccess }: LoginPageProps) {
 
         if (error) throw error;
 
-        if (data.session) {
+        if (data.user && !data.session) {
+          setEmailSent(true);
+        } else if (data.session) {
           toast.success('Cadastro realizado com sucesso! Bem-vindo!');
           onLoginSuccess();
-        } else if (data.user && !data.session) {
-          toast.info('Cadastro realizado! Verifique seu e-mail para confirmar a conta, ou tente fazer login.');
-          setIsSignUp(false);
         }
       } else {
         const { data, error } = await supabase.auth.signInWithPassword({
@@ -85,11 +91,52 @@ export function LoginPage({ onLoginSuccess }: LoginPageProps) {
     }
   };
 
+  if (emailSent) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-background p-4 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-accent-purple/5 via-transparent to-transparent pointer-events-none" />
+        <Card className="w-full max-w-md border-border bg-surface relative z-10">
+          <CardHeader className="space-y-1">
+            <div className="flex justify-center mb-4">
+              <img src="/logobranca.svg" alt="NAVEX Finance" className="h-12 w-auto" />
+            </div>
+            <CardTitle className="text-center text-xl">Confirme seu e-mail</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4 text-center">
+            <div className="flex justify-center">
+              <div className="w-16 h-16 rounded-full bg-accent-purple/10 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 text-accent-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+            </div>
+            <p className="text-text-dim text-sm">
+              Enviamos um link de confirmação para:
+            </p>
+            <p className="font-semibold text-foreground">{email}</p>
+            <p className="text-text-dim text-sm">
+              Acesse seu e-mail e clique no link para ativar sua conta. Após confirmar, volte aqui para fazer login.
+            </p>
+          </CardContent>
+          <CardFooter className="flex flex-col space-y-3">
+            <Button
+              type="button"
+              className="w-full bg-gradient-to-r from-accent-purple to-accent-purple/80 text-white hover:from-accent-purple/90 hover:to-accent-purple/70 font-bold h-11 shadow-[0_0_30px_rgba(124,58,237,0.4)] transition-all duration-300"
+              onClick={() => { setEmailSent(false); setIsSignUp(false); setPassword(''); setConfirmPassword(''); }}
+            >
+              IR PARA O LOGIN
+            </Button>
+          </CardFooter>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-background p-4 relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-accent-purple/5 via-transparent to-transparent pointer-events-none" />
-      
+
       <Card className="w-full max-w-md border-border bg-surface relative z-10">
         <CardHeader className="space-y-1">
           <div className="flex justify-center mb-4">
@@ -128,6 +175,21 @@ export function LoginPage({ onLoginSuccess }: LoginPageProps) {
                 className="bg-background border-border"
               />
             </div>
+            {isSignUp && (
+              <div className="space-y-2">
+                <Label htmlFor="confirmPassword">Confirmar senha</Label>
+                <Input
+                  id="confirmPassword"
+                  type="password"
+                  placeholder="Repita a senha"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  minLength={6}
+                  className="bg-background border-border"
+                />
+              </div>
+            )}
           </CardContent>
           <CardFooter className="flex flex-col space-y-4">
             <Button
@@ -139,7 +201,7 @@ export function LoginPage({ onLoginSuccess }: LoginPageProps) {
             </Button>
             <button
               type="button"
-              onClick={() => setIsSignUp(!isSignUp)}
+              onClick={() => { setIsSignUp(!isSignUp); setConfirmPassword(''); }}
               className="text-sm text-text-dim hover:text-accent-purple transition-colors"
             >
               {isSignUp ? 'Já tem uma conta? Entre aqui' : 'Não tem conta? Cadastre-se'}
