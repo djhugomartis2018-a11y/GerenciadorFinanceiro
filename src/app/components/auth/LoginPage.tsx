@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { supabase } from '../../../lib/supabase';
+
+const SUPABASE_URL = 'https://jughxjhaqaearaamlglp.supabase.co';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '../ui/card';
@@ -30,31 +32,28 @@ export function LoginPage({ onLoginSuccess }: LoginPageProps) {
           return;
         }
 
-        const { data, error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            data: {
-              full_name: '',
-            },
-          },
-        });
+        const res = await fetch(
+          `${SUPABASE_URL}/functions/v1/custom-signup`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+          }
+        );
 
-        if (error) {
-          if (error.message.toLowerCase().includes('sending confirmation email') || error.message.toLowerCase().includes('error sending')) {
-            toast.error('Não foi possível enviar o e-mail de confirmação. Tente novamente em alguns minutos.');
+        const result = await res.json();
+
+        if (!res.ok) {
+          if (result.error?.includes('já está cadastrado')) {
+            toast.error('Este e-mail já está cadastrado. Tente fazer login.');
+            setIsSignUp(false);
           } else {
-            throw error;
+            toast.error(result.error || 'Erro ao criar conta. Tente novamente.');
           }
           return;
         }
 
-        if (data.user && !data.session) {
-          setEmailSent(true);
-        } else if (data.session) {
-          toast.success('Cadastro realizado com sucesso! Bem-vindo!');
-          onLoginSuccess();
-        }
+        setEmailSent(true);
       } else {
         const { data, error } = await supabase.auth.signInWithPassword({
           email,
