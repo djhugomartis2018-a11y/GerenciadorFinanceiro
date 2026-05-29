@@ -177,7 +177,7 @@ export default function App() {
   const [showLanding, setShowLanding] = useState(true);
   const [showMonthLimitModal, setShowMonthLimitModal] = useState(false);
   const isMobile = useIsMobile();
-  const { plan } = useSubscription();
+  const { plan } = useSubscription(session?.user?.id ?? null);
 
   // Load data from Supabase
   const fetchUserData = useCallback(async (userId: string) => {

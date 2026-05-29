@@ -1,16 +1,27 @@
+import { useState, useEffect } from 'react';
 import { Plan } from './plans';
+import { supabase } from './supabase';
 
-// Swap this for a real Supabase query when billing is live:
-//
-//   const { data } = await supabase
-//     .from('subscriptions')
-//     .select('plan')
-//     .eq('user_id', userId)
-//     .single();
-//   return data?.plan ?? 'basic';
+export function useSubscription(userId: string | null): { plan: Plan; isLoading: boolean } {
+  const [plan, setPlan] = useState<Plan>('basic');
+  const [isLoading, setIsLoading] = useState(true);
 
-const MOCK_PLAN: Plan = 'basic';
+  useEffect(() => {
+    if (!userId) {
+      setIsLoading(false);
+      return;
+    }
 
-export function useSubscription(): { plan: Plan; isLoading: boolean } {
-  return { plan: MOCK_PLAN, isLoading: false };
+    supabase
+      .from('user_plans')
+      .select('plan')
+      .eq('user_id', userId)
+      .single()
+      .then(({ data }) => {
+        setPlan((data?.plan as Plan) ?? 'basic');
+        setIsLoading(false);
+      });
+  }, [userId]);
+
+  return { plan, isLoading };
 }
