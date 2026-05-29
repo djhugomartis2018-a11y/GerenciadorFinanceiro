@@ -1,0 +1,426 @@
+/* ========================================
+   SISTEMA DE RESPONSIVIDADE COMPLETO
+   Mobile-First Design (320px - 4K)
+   ======================================== */
+
+/* === VARIÁVEIS RESPONSIVAS === */
+:root {
+  --spacing-mobile: 12px;
+  --spacing-tablet: 16px;
+  --spacing-desktop: 24px;
+  
+  --font-size-mobile: 14px;
+  --font-size-tablet: 15px;
+  --font-size-desktop: 16px;
+  
+  --header-height-mobile: 56px;
+  --header-height-desktop: 72px;
+  
+  --sidebar-width-mobile: 280px;
+  --sidebar-width-desktop: 320px;
+}
+
+/* === BASE MOBILE FIRST === */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+html {
+  font-size: var(--font-size-mobile);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  overscroll-behavior-y: contain;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+/* === INPUTS OTIMIZADOS PARA TOUCH === */
+input,
+button,
+select,
+textarea {
+  min-height: 44px; /* iOS recommendation */
+  font-size: 16px; /* Prevents zoom on iOS */
+}
+
+@media (min-width: 768px) {
+  input,
+  button,
+  select,
+  textarea {
+    font-size: inherit;
+  }
+}
+
+/* === LAYOUT RESPONSIVO === */
+
+/* Mobile Small (320px - 479px) */
+@media (max-width: 479px) {
+  .container {
+    padding: var(--spacing-mobile);
+  }
+  
+  /* Cards em coluna única */
+  [style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Textos grandes reduzidos */
+  [style*="font-size: 48px"],
+  [style*="font-size: 28px"] {
+    font-size: 24px !important;
+  }
+  
+  /* Gráficos com altura reduzida */
+  [style*="height: 300px"],
+  [style*="height: 320px"] {
+    height: 220px !important;
+  }
+}
+
+/* Mobile Medium (480px - 767px) */
+@media (min-width: 480px) and (max-width: 767px) {
+  html {
+    font-size: 15px;
+  }
+  
+  .container {
+    padding: var(--spacing-tablet);
+  }
+  
+  /* Cards em 2 colunas quando possível */
+  [style*="grid-template-columns: repeat(auto-fit"] {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
+  }
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  html {
+    font-size: var(--font-size-tablet);
+  }
+  
+  .container {
+    padding: var(--spacing-tablet);
+  }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+  html {
+    font-size: var(--font-size-desktop);
+  }
+  
+  .container {
+    padding: var(--spacing-desktop);
+  }
+}
+
+/* === SIDEBAR RESPONSIVA === */
+
+/* Mobile: sidebar off-canvas */
+@media (max-width: 767px) {
+  [data-sidebar="sidebar"] {
+    position: fixed;
+    inset-y: 0;
+    left: 0;
+    z-index: 50;
+    width: var(--sidebar-width-mobile);
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  [data-sidebar="sidebar"][data-state="open"] {
+    transform: translateX(0);
+  }
+  
+  /* Overlay quando sidebar aberta */
+  [data-sidebar="sidebar"][data-state="open"]::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+  }
+}
+
+/* Desktop: sidebar fixa */
+@media (min-width: 768px) {
+  [data-sidebar="sidebar"] {
+    width: var(--sidebar-width-desktop);
+  }
+}
+
+/* === TABELAS RESPONSIVAS === */
+@media (max-width: 767px) {
+  /* Scroll horizontal em tabelas */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Células com padding reduzido */
+  td, th {
+    padding: 12px 8px !important;
+    font-size: 13px !important;
+  }
+  
+  /* Ocultar colunas menos importantes em mobile */
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+/* === CARDS RESPONSIVOS === */
+.card-responsive {
+  padding: 16px;
+  min-height: auto;
+}
+
+@media (min-width: 768px) {
+  .card-responsive {
+    padding: 24px;
+  }
+}
+
+/* === BOTÕES RESPONSIVOS === */
+@media (max-width: 767px) {
+  button {
+    width: 100%;
+    min-height: 48px;
+    font-size: 15px;
+  }
+  
+  /* Botões em grupo ficam empilhados */
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media (min-width: 768px) {
+  .button-group {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+  }
+}
+
+/* === GRÁFICOS RESPONSIVOS === */
+@media (max-width: 767px) {
+  .chart-container {
+    height: 220px !important;
+    min-width: 300px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .chart-container {
+    height: 280px !important;
+  }
+}
+
+/* === FORMULÁRIOS RESPONSIVOS === */
+@media (max-width: 767px) {
+  /* Inputs sempre full-width */
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="password"],
+  select,
+  textarea {
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+  
+  /* Labels em cima dos inputs */
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+/* === TABS RESPONSIVAS === */
+@media (max-width: 767px) {
+  [role="tablist"] {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  
+  [role="tablist"]::-webkit-scrollbar {
+    display: none;
+  }
+  
+  [role="tab"] {
+    white-space: nowrap;
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+}
+
+/* === MODAL/DIALOG RESPONSIVO === */
+@media (max-width: 767px) {
+  [role="dialog"],
+  .modal {
+    width: calc(100vw - 32px) !important;
+    max-width: none !important;
+    margin: 16px;
+  }
+}
+
+/* === SPACING UTILITÁRIOS === */
+@media (max-width: 767px) {
+  .p-8 { padding: 16px !important; }
+  .p-4 { padding: 12px !important; }
+  .gap-8 { gap: 16px !important; }
+  .gap-4 { gap: 12px !important; }
+  .mb-8 { margin-bottom: 16px !important; }
+  .mb-4 { margin-bottom: 12px !important; }
+}
+
+/* === TIPOGRAFIA RESPONSIVA === */
+@media (max-width: 767px) {
+  h1 { font-size: 24px !important; }
+  h2 { font-size: 20px !important; }
+  h3 { font-size: 18px !important; }
+  h4 { font-size: 16px !important; }
+}
+
+/* === SCROLL SUAVE === */
+html {
+  scroll-behavior: smooth;
+}
+
+/* === PERFORMANCE === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* === DARK MODE OTIMIZADO === */
+@media (prefers-color-scheme: dark) {
+  /* Já está coberto pelo theme.css */
+}
+
+/* === LANDSCAPE MOBILE === */
+@media (max-width: 767px) and (orientation: landscape) {
+  .hide-landscape {
+    display: none;
+  }
+  
+  /* Reduz altura de elementos grandes */
+  .chart-container {
+    height: 180px !important;
+  }
+}
+
+/* === PRINT === */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
+
+/* === ACESSIBILIDADE === */
+@media (prefers-contrast: high) {
+  * {
+    border-width: 2px !important;
+  }
+}
+
+/* Focus visível para navegação por teclado */
+:focus-visible {
+  outline: 2px solid var(--accent-lime);
+  outline-offset: 2px;
+}
+
+/* === UTILITÁRIOS DE DISPLAY === */
+.mobile-only {
+  display: block;
+}
+
+.tablet-up {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .mobile-only {
+    display: none;
+  }
+  
+  .tablet-up {
+    display: block;
+  }
+}
+
+.desktop-only {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .desktop-only {
+    display: block;
+  }
+}
+
+/* === SAFE AREAS (iOS) === */
+@supports (padding: env(safe-area-inset-top)) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Efeito de vidro para o header */
+header {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Animações suaves */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Estilo de scroll personalizado */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-bright);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-dark);
+}
