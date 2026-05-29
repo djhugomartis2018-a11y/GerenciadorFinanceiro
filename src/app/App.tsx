@@ -14,11 +14,14 @@ import {
   Filler
 } from 'chart.js';
 import { Doughnut, Line } from 'react-chartjs-2';
-import { LayoutGrid, TrendingUp, Target, User, Plus, Trash2, LogOut, ChevronRight, Wallet, ArrowUpCircle, ArrowDownCircle, Calendar, Lock } from 'lucide-react';
+import { LayoutGrid, TrendingUp, Target, User, Plus, Trash2, LogOut, ChevronRight, Wallet, ArrowUpCircle, ArrowDownCircle, Calendar, Lock, CreditCard } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useSubscription } from '../lib/useSubscription';
-import { canAddMonth, hasFeature, PLAN_NAMES } from '../lib/plans';
+import { canAddMonth, hasFeature, PLAN_NAMES, Plan } from '../lib/plans';
+import { BillingCycle, SubscriptionStatus } from '../lib/pricingConfig';
+import { SubscriptionContext } from '../context/SubscriptionContext';
 import { UpgradeGate } from './components/ui/UpgradeGate';
+import { ManagePlanPage } from './components/billing/ManagePlanPage';
 import { LoginPage } from './components/auth/LoginPage';
 import { LandingPage } from './components/landing/LandingPage';
 import { ProfilePage } from './components/profile/ProfilePage';
@@ -177,7 +180,44 @@ export default function App() {
   const [showLanding, setShowLanding] = useState(true);
   const [showMonthLimitModal, setShowMonthLimitModal] = useState(false);
   const isMobile = useIsMobile();
-  const { plan } = useSubscription(session?.user?.id ?? null);
+
+  // ─── Subscription state ──────────────────────────────────────────────────
+  const { plan: supabasePlan } = useSubscription(session?.user?.id ?? null);
+  const [plan, setPlan] = useState<Plan>('basic');
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>('monthly');
+  const [subscriptionStatus, setSubscriptionStatus] = useState<SubscriptionStatus>('active');
+  const [billingLoading, setBillingLoading] = useState(false);
+
+  useEffect(() => { setPlan(supabasePlan); }, [supabasePlan]);
+
+  // ─── Stripe integration point ────────────────────────────────────────────
+  // Today:  mocks upgrade locally
+  // Future: replace body with Stripe Checkout redirect using STRIPE_PRICE_IDS
+  async function subscribe(newPlan: Plan, cycle: BillingCycle) {
+    setBillingLoading(true);
+    await new Promise(r => setTimeout(r, 800));
+    setPlan(newPlan);
+    setBillingCycle(cycle);
+    setSubscriptionStatus('active');
+    setBillingLoading(false);
+  }
+
+  async function cancelSubscription() {
+    setBillingLoading(true);
+    await new Promise(r => setTimeout(r, 500));
+    setPlan('basic');
+    setSubscriptionStatus('canceled');
+    setBillingLoading(false);
+  }
+
+  const subscriptionContextValue = {
+    plan,
+    billingCycle,
+    status: subscriptionStatus,
+    isLoading: billingLoading,
+    subscribe,
+    cancel: cancelSubscription,
+  };
 
   // Load data from Supabase
   const fetchUserData = useCallback(async (userId: string) => {
@@ -345,6 +385,7 @@ export default function App() {
   }
 
   return (
+    <SubscriptionContext.Provider value={subscriptionContextValue}>
     <SidebarProvider>
       <Toaster richColors position="top-right" />
       <div className="flex w-full min-h-screen bg-background text-foreground selection:bg-accent-purple/30">
@@ -382,6 +423,12 @@ export default function App() {
                       <Target size={20} className={currentPage === 'metas' ? "text-accent-purple" : ""} />
                       <span className="font-bold">Minhas Metas</span>
                       {!hasFeature(plan, 'financialGoals') && <Lock size={12} className="ml-auto text-text-dark" />}
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton isActive={currentPage === 'plano'} onClick={() => showPage('plano')}>
+                      <CreditCard size={20} className={currentPage === 'plano' ? "text-accent-purple" : ""} />
+                      <span className="font-bold">Meu Plano</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 </SidebarMenu>
@@ -455,10 +502,11 @@ export default function App() {
               <SidebarTrigger className="md:hidden" />
               <div>
                 <h2 className="text-sm font-black uppercase tracking-widest text-text-dark">
-                  {currentPage === 'overview' ? 'Painel Geral' : 
+                  {currentPage === 'overview' ? 'Painel Geral' :
                    currentPage === 'mes' ? `Planejamento · ${currentMonth}` :
                    currentPage === 'historico' ? 'Análise de Dados' :
-                   currentPage === 'metas' ? 'Minhas Metas' : 'Meu Perfil'}
+                   currentPage === 'metas' ? 'Minhas Metas' :
+                   currentPage === 'plano' ? 'Meu Plano' : 'Meu Perfil'}
                 </h2>
               </div>
             </div>
@@ -483,15 +531,16 @@ export default function App() {
               />
             )}
             {currentPage === 'historico' && (
-              <UpgradeGate feature="monthlyComparison" userPlan={plan}>
+              <UpgradeGate feature="monthlyComparison">
                 <HistoricoPage data={data} openMonth={openMonth} />
               </UpgradeGate>
             )}
             {currentPage === 'metas' && (
-              <UpgradeGate feature="financialGoals" userPlan={plan}>
+              <UpgradeGate feature="financialGoals">
                 <MetasPage data={data} updateData={updateData} />
               </UpgradeGate>
             )}
+            {currentPage === 'plano' && <ManagePlanPage />}
             {currentPage === 'perfil' && <ProfilePage />}
           </main>
         </SidebarInset>
@@ -532,6 +581,7 @@ export default function App() {
         </div>
       )}
     </SidebarProvider>
+    </SubscriptionContext.Provider>
   );
 }
 

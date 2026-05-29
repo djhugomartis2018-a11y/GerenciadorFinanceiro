@@ -1,7 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Check } from "lucide-react";
+import { Plan } from "../../../lib/plans";
+import { PRICING, getYearlySavings, BillingCycle } from "../../../lib/pricingConfig";
 
-export function PricingSection() {
+interface PricingSectionProps {
+  onSelectPlan?: (plan: Plan, cycle: BillingCycle) => void;
+}
+
+export function PricingSection({ onSelectPlan }: PricingSectionProps = {}) {
   const [isAnnual, setIsAnnual] = useState(false);
   const [ready, setReady] = useState(false);
 
@@ -10,12 +16,18 @@ export function PricingSection() {
     return () => cancelAnimationFrame(id);
   }, []);
 
-  const plans = [
+  const plans: Array<{
+    key: Plan;
+    name: string;
+    description: string;
+    features: string[];
+    note: string | null;
+    cta: string;
+    highlighted: boolean;
+  }> = [
     {
+      key: 'basic',
       name: "Básico",
-      price: "R$ 0",
-      annualPrice: "R$ 0",
-      period: "por usuário/mês",
       description: "Para começar sua organização financeira",
       features: [
         "Até 2 meses ativos",
@@ -29,10 +41,8 @@ export function PricingSection() {
       highlighted: false,
     },
     {
+      key: 'essential',
       name: "Essencial",
-      price: "R$ 19",
-      annualPrice: "R$ 15",
-      period: "por usuário/mês",
       description: "Para acompanhar suas finanças continuamente",
       features: [
         "Meses ilimitados",
@@ -47,10 +57,8 @@ export function PricingSection() {
       highlighted: true,
     },
     {
+      key: 'pro',
       name: "Pro",
-      price: "R$ 39",
-      annualPrice: "R$ 31",
-      period: "por usuário/mês",
       description: "Para organização financeira avançada",
       features: [
         "Tudo do Essencial",
@@ -65,6 +73,8 @@ export function PricingSection() {
       highlighted: false,
     },
   ];
+
+  const cycle: BillingCycle = isAnnual ? 'yearly' : 'monthly';
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   useEffect(() => {
@@ -187,9 +197,16 @@ export function PricingSection() {
 
               <p className="pv3-name">{plan.name}</p>
               <div className="pv3-price-row">
-                <span className="pv3-price">{isAnnual ? plan.annualPrice : plan.price}</span>
-                <span className="pv3-period">{plan.period}</span>
+                <span className="pv3-price">
+                  {PRICING[plan.key][cycle] === 0 ? 'R$ 0' : `R$ ${PRICING[plan.key][cycle]}`}
+                </span>
+                <span className="pv3-period">{isAnnual ? '/ano' : '/mês'}</span>
               </div>
+              {isAnnual && plan.key !== 'basic' && (
+                <p style={{ fontSize: 12, color: '#a6a7ac', margin: '0 0 4px' }}>
+                  Economize R${getYearlySavings(plan.key)} por ano
+                </p>
+              )}
               <p className="pv3-billing">{isAnnual ? 'Cobrado anualmente' : 'Cobrado mensalmente'}</p>
               <p className="pv3-desc">{plan.description}</p>
 
@@ -210,7 +227,10 @@ export function PricingSection() {
                 </p>
               )}
 
-              <button className={plan.highlighted ? 'pv3-btn-primary' : 'pv3-btn-ghost'}>
+              <button
+                className={plan.highlighted ? 'pv3-btn-primary' : 'pv3-btn-ghost'}
+                onClick={() => onSelectPlan?.(plan.key, cycle)}
+              >
                 {plan.cta}
               </button>
             </div>
