@@ -14,7 +14,7 @@ import {
   Filler
 } from 'chart.js';
 import { Doughnut, Line } from 'react-chartjs-2';
-import { LayoutGrid, TrendingUp, Target, User, Plus, Trash2, LogOut, ChevronRight, Wallet, ArrowUpCircle, ArrowDownCircle, Calendar, Lock, CreditCard } from 'lucide-react';
+import { LayoutGrid, TrendingUp, Target, User, Plus, Trash2, LogOut, ChevronRight, Wallet, ArrowUpCircle, ArrowDownCircle, Calendar, Lock, CreditCard, Layers } from 'lucide-react';
 import { supabase, supabaseUrl } from '../lib/supabase';
 import { useSubscription } from '../lib/useSubscription';
 import { canAddMonth, hasFeature, PLAN_NAMES, Plan } from '../lib/plans';
@@ -22,6 +22,7 @@ import { BillingCycle, SubscriptionStatus, STRIPE_PRICE_IDS } from '../lib/prici
 import { SubscriptionContext } from '../context/SubscriptionContext';
 import { UpgradeGate } from './components/ui/UpgradeGate';
 import { ManagePlanPage } from './components/billing/ManagePlanPage';
+import { ParcelamentosPage } from './components/billing/ParcelamentosPage';
 import { LoginPage } from './components/auth/LoginPage';
 import { LandingPage } from './components/landing/LandingPage';
 import { ProfilePage } from './components/profile/ProfilePage';
@@ -100,10 +101,19 @@ interface Meta {
   guardei: number;
 }
 
+export interface Parcelamento {
+  id: string;
+  desc: string;
+  valorParcela: number;
+  totalParcelas: number;
+  parcelasPagas: number;
+}
+
 interface AppData {
   months: string[];
   mesData: Record<string, MesData>;
   metas: Meta[];
+  parcelamentos: Parcelamento[];
 }
 
 const defaultMesData = (): MesData => ({
@@ -146,7 +156,8 @@ const getDefaultData = (): AppData => ({
       variaveis: [{ desc: 'Restaurante', val: 400 }]
     }
   },
-  metas: defaultMetas()
+  metas: defaultMetas(),
+  parcelamentos: []
 });
 
 const fmt = (v: number) =>
@@ -315,6 +326,40 @@ export default function App() {
     setCurrentPage(name);
   };
 
+  const addParcelamento = (p: Omit<Parcelamento, 'id'>) => {
+    const newData = { ...data, parcelamentos: [...(data.parcelamentos ?? []), { ...p, id: crypto.randomUUID() }] };
+    setData(newData);
+    if (session?.user) saveUserData(session.user.id, newData);
+  };
+
+  const pagarParcela = (id: string) => {
+    const newData = {
+      ...data,
+      parcelamentos: (data.parcelamentos ?? []).map(p =>
+        p.id === id ? { ...p, parcelasPagas: Math.min(p.parcelasPagas + 1, p.totalParcelas) } : p
+      )
+    };
+    setData(newData);
+    if (session?.user) saveUserData(session.user.id, newData);
+  };
+
+  const desfazerParcela = (id: string) => {
+    const newData = {
+      ...data,
+      parcelamentos: (data.parcelamentos ?? []).map(p =>
+        p.id === id ? { ...p, parcelasPagas: Math.max(p.parcelasPagas - 1, 0) } : p
+      )
+    };
+    setData(newData);
+    if (session?.user) saveUserData(session.user.id, newData);
+  };
+
+  const deleteParcelamento = (id: string) => {
+    const newData = { ...data, parcelamentos: (data.parcelamentos ?? []).filter(p => p.id !== id) };
+    setData(newData);
+    if (session?.user) saveUserData(session.user.id, newData);
+  };
+
   const openMonth = (key: string) => {
     setCurrentMonth(key);
     setCurrentPage('mes');
@@ -441,6 +486,13 @@ export default function App() {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
+                    <SidebarMenuButton isActive={currentPage === 'parcelamentos'} onClick={() => showPage('parcelamentos')}>
+                      <Layers size={20} className={currentPage === 'parcelamentos' ? "text-accent-purple" : ""} />
+                      <span className="font-bold">Parcelamentos</span>
+                      {!hasFeature(plan, 'parcelamentos') && <Lock size={12} className="ml-auto text-text-dark" />}
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                  <SidebarMenuItem>
                     <SidebarMenuButton isActive={currentPage === 'plano'} onClick={() => showPage('plano')}>
                       <CreditCard size={20} className={currentPage === 'plano' ? "text-accent-purple" : ""} />
                       <span className="font-bold">Meu Plano</span>
@@ -521,6 +573,7 @@ export default function App() {
                    currentPage === 'mes' ? `Planejamento · ${currentMonth}` :
                    currentPage === 'historico' ? 'Análise de Dados' :
                    currentPage === 'metas' ? 'Minhas Metas' :
+                   currentPage === 'parcelamentos' ? 'Parcelamentos' :
                    currentPage === 'plano' ? 'Meu Plano' : 'Meu Perfil'}
                 </h2>
               </div>
@@ -553,6 +606,17 @@ export default function App() {
             {currentPage === 'metas' && (
               <UpgradeGate feature="financialGoals">
                 <MetasPage data={data} updateData={updateData} />
+              </UpgradeGate>
+            )}
+            {currentPage === 'parcelamentos' && (
+              <UpgradeGate feature="parcelamentos">
+                <ParcelamentosPage
+                  parcelamentos={data.parcelamentos ?? []}
+                  onAdd={addParcelamento}
+                  onPagar={pagarParcela}
+                  onDesfazer={desfazerParcela}
+                  onDelete={deleteParcelamento}
+                />
               </UpgradeGate>
             )}
             {currentPage === 'plano' && <ManagePlanPage />}

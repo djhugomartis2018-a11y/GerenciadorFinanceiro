@@ -3,6 +3,7 @@ export type Plan = 'basic' | 'essential' | 'pro';
 export interface PlanConfig {
   maxMonths: number;
   // ── Essencial ──────────────────────────────────────────
+  parcelamentos: boolean;       // Controle de parcelamentos
   categoriesCustom: boolean;
   monthlyComparison: boolean;
   financialScore: boolean;      // Score financeiro pessoal (0–1000)
@@ -27,6 +28,7 @@ export type GatedFeature = keyof Omit<PlanConfig, 'maxMonths'>;
 export const PLANS: Record<Plan, PlanConfig> = {
   basic: {
     maxMonths: 2,
+    parcelamentos: false,
     categoriesCustom: false,
     monthlyComparison: false,
     financialScore: false,
@@ -46,6 +48,7 @@ export const PLANS: Record<Plan, PlanConfig> = {
   },
   essential: {
     maxMonths: Infinity,
+    parcelamentos: true,
     categoriesCustom: true,
     monthlyComparison: true,
     financialScore: true,
@@ -65,6 +68,7 @@ export const PLANS: Record<Plan, PlanConfig> = {
   },
   pro: {
     maxMonths: Infinity,
+    parcelamentos: true,
     categoriesCustom: true,
     monthlyComparison: true,
     financialScore: true,
@@ -92,6 +96,7 @@ export const PLAN_NAMES: Record<Plan, string> = {
 
 export const FEATURE_REQUIRES: Record<GatedFeature, Plan> = {
   // Essencial+
+  parcelamentos: 'essential',
   categoriesCustom: 'essential',
   monthlyComparison: 'essential',
   financialScore: 'essential',
