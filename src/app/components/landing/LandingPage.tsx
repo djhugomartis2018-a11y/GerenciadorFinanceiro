@@ -1,4 +1,4 @@
-import { ChevronRight, TrendingUp, Target, Wallet, BarChart3, ArrowRight, Sparkles, Smartphone, LayoutGrid, User, ArrowUpCircle, ArrowDownCircle, Calendar } from 'lucide-react';
+import { TrendingUp, Target, BarChart3, ArrowRight, Sparkles, Smartphone, User } from 'lucide-react';
 import { Button } from '../ui/button';
 import { PricingSection } from '../ui/pricing';
 import { ScrollShowcase } from './ScrollShowcase';
@@ -51,149 +51,66 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative pt-44 pb-20 px-4">
-        <div className="max-w-5xl mx-auto text-center space-y-8">
-          {/* Top Badge */}
+      {/* Hero Section — clean, full viewport, sem mockup duplicado */}
+      <section className="relative min-h-screen flex items-center justify-center px-4">
+        <div className="max-w-4xl mx-auto text-center space-y-8">
+
+          {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
-            <div className="w-1.5 h-1.5 rounded-full bg-accent-lime animate-pulse" />
-            <span className="text-[11px] font-bold uppercase tracking-widest text-white/70">Você Registra. O Sistema Organiza.</span>
+            <div className="w-1.5 h-1.5 rounded-full bg-accent-purple animate-pulse" />
+            <span className="text-[11px] font-bold uppercase tracking-widest text-white/60">
+              Você Registra. O Sistema Organiza.
+            </span>
           </div>
 
-          {/* Main Title */}
-          <div className="space-y-6">
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1]">
-              Organize suas Finanças com<br />
-              <span className="bg-gradient-to-b from-white to-white/50 bg-clip-text text-transparent italic">Método e Clareza</span>
-            </h1>
-            <p className="text-lg text-white/50 max-w-2xl mx-auto font-medium">
-              Uma plataforma inovadora que simplifica seu controle, aumenta sua eficiência e ajuda suas finanças a crescerem de forma organizada.
-            </p>
-          </div>
+          {/* Headline */}
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.05]">
+            Organize suas<br />
+            <span className="bg-gradient-to-br from-white via-white to-white/40 bg-clip-text text-transparent italic">
+              Finanças
+            </span>{' '}
+            com<br />
+            <span className="text-white/30">Método e Clareza</span>
+          </h1>
 
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <Button
+          {/* Subheadline */}
+          <p className="text-lg md:text-xl text-white/40 max-w-xl mx-auto font-medium leading-relaxed">
+            Controle receitas, despesas e metas financeiras.<br />
+            Sem automações invasivas. Só <span className="text-white/70 font-semibold">clareza real</span>.
+          </p>
+
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+            <button
               onClick={onGetStarted}
-              className="h-12 px-8 rounded-full border border-white/10 bg-white/5 hover:bg-[#daeb44] hover:text-black hover:border-[#daeb44] hover:shadow-[0_0_30px_rgba(218,235,68,0.5)] text-sm font-bold backdrop-blur-sm transition-all duration-300 group"
+              className="group flex items-center gap-2 h-13 px-8 py-4 rounded-full bg-white text-black text-sm font-bold hover:bg-white/90 transition-all duration-300 shadow-[0_0_40px_rgba(255,255,255,0.12)]"
             >
-              Começar Agora <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
+              Começar grátis
+              <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+            </button>
+            <button
+              onClick={onGetStarted}
+              className="h-13 px-8 py-4 rounded-full border border-white/10 bg-white/[0.03] text-white text-sm font-bold hover:bg-white/[0.07] transition-all duration-300"
+            >
+              Ver demonstração
+            </button>
           </div>
 
-          {/* Dashboard Preview Mockup */}
-          <div className="relative mt-20 max-w-6xl mx-auto">
-            <div className="absolute inset-0 bg-accent-purple/10 blur-[120px] -z-10 rounded-full" />
-            <div className="rounded-2xl border border-white/5 bg-[#0d0d0d] overflow-hidden shadow-2xl flex h-[550px]">
-              {/* Sidebar Mockup */}
-              <div className="w-64 border-r border-white/5 bg-[#141414] p-6 flex flex-col gap-8 hidden md:flex">
-                <div className="flex flex-col items-center gap-4">
-                  <img src="/logobranca.svg" alt="Logo" className="w-24 h-24 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]" />
-                  <div className="h-px w-full bg-white/5" />
-                </div>
-                <div className="space-y-4">
-                  <div className="text-[10px] font-black text-white/30 tracking-widest uppercase">Menu Principal</div>
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-3 p-2 rounded-lg bg-white/5 text-accent-purple">
-                      <LayoutGrid size={18} />
-                      <span className="text-xs font-bold">Painel Geral</span>
-                    </div>
-                    <div className="flex items-center gap-3 p-2 rounded-lg text-white/40">
-                      <TrendingUp size={18} />
-                      <span className="text-xs font-bold">Análises</span>
-                    </div>
-                    <div className="flex items-center gap-3 p-2 rounded-lg text-white/40">
-                      <Target size={18} />
-                      <span className="text-xs font-bold">Minhas Metas</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-auto space-y-3">
-                  <div className="h-10 bg-white/5 border border-white/5 rounded-xl flex items-center px-3 text-[10px] text-white/20 font-medium">
-                    Novo mês (Ex: Jul/25)
-                  </div>
-                  <div className="flex items-center gap-3 p-2 rounded-xl bg-white/[0.02] border border-white/5">
-                    <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center">
-                      <User size={14} className="text-white/40" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="h-2 w-16 bg-white/20 rounded-full mb-1" />
-                      <div className="h-1.5 w-24 bg-white/10 rounded-full" />
-                    </div>
-                  </div>
-                </div>
+          {/* Trust */}
+          <div className="flex flex-wrap items-center justify-center gap-6 pt-2">
+            {['Grátis para começar', 'Sem cartão de crédito', 'Cancele quando quiser'].map((t) => (
+              <div key={t} className="flex items-center gap-1.5 text-[11px] text-white/30 font-medium">
+                <span className="text-accent-purple">✓</span> {t}
               </div>
+            ))}
+          </div>
+        </div>
 
-              {/* Main Content Mockup */}
-              <div className="flex-1 bg-[#0d0d0d] p-8 overflow-hidden">
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                  {[
-                    { label: 'Total Recebido', val: 'R$ 12.450,00', color: 'text-blue-400', icon: ArrowUpCircle },
-                    { label: 'Total Pago', val: 'R$ 5.820,00', color: 'text-red-400', icon: ArrowDownCircle },
-                    { label: 'Saldo Acumulado', val: 'R$ 6.630,00', color: 'text-accent-purple', icon: Wallet },
-                    { label: 'Último Mês', val: 'R$ 1.200,00', color: 'text-white/40', icon: Calendar }
-                  ].map((stat, i) => (
-                    <div key={i} className="bg-[#1a1a1a] border border-white/5 p-4 rounded-2xl">
-                      <div className="flex justify-between items-start mb-3">
-                        <div className="p-1.5 rounded-lg bg-white/5">
-                          <stat.icon size={16} className={stat.color} />
-                        </div>
-                      </div>
-                      <div className="text-[8px] font-black text-white/30 uppercase tracking-widest mb-1">{stat.label}</div>
-                      <div className={`text-sm font-black ${stat.color}`}>{stat.val}</div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  <div className="lg:col-span-2 bg-[#1a1a1a] border border-white/5 rounded-2xl p-6">
-                    <div className="flex justify-between items-center mb-6">
-                      <div className="text-xs font-bold">Evolução Financeira</div>
-                      <div className="flex gap-3 text-[8px] font-bold">
-                        <div className="flex items-center gap-1"><div className="w-1.5 h-1.5 rounded-full bg-accent-purple" /> ENTRADAS</div>
-                        <div className="flex items-center gap-1"><div className="w-1.5 h-1.5 rounded-full bg-red-500" /> SAÍDAS</div>
-                      </div>
-                    </div>
-                    <div className="h-48 flex items-end gap-2 px-2">
-                      {[30, 45, 35, 60, 40, 75, 50, 85, 65, 90, 70, 95].map((h, i) => (
-                        <div key={i} className="flex-1 flex flex-col gap-1 items-center">
-                          <div style={{ height: `${h}%` }} className={`w-full rounded-t-sm ${i % 2 === 0 ? 'bg-accent-purple/40' : 'bg-red-500/20'}`} />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="bg-[#1a1a1a] border border-white/5 rounded-2xl p-6">
-                    <div className="text-xs font-bold mb-6">Meses Recentes</div>
-                    <div className="space-y-3">
-                      {['Maio/2024', 'Abril/2024', 'Março/2024'].map((m, i) => (
-                        <div key={i} className="flex items-center justify-between p-3 rounded-xl bg-[#0d0d0d] border border-white/5">
-                          <div className="text-[10px] font-bold">{m}</div>
-                          <ChevronRight size={12} className="text-white/20" />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-6 bg-[#1a1a1a] border border-white/5 rounded-2xl overflow-hidden">
-                  <div className="px-6 py-4 border-b border-white/5 bg-white/[0.02] flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-accent-purple animate-pulse" />
-                    <div className="text-[10px] font-black uppercase tracking-widest">Contas Pendentes</div>
-                  </div>
-                  <div className="p-4 space-y-3">
-                    {[
-                      { d: 'Aluguel / Financiamento', v: 'R$ 1.200,00', s: false },
-                      { d: 'Energia Elétrica', v: 'R$ 245,50', s: true }
-                    ].map((item, i) => (
-                      <div key={i} className="flex items-center justify-between text-[10px] opacity-60">
-                        <div className={item.s ? 'line-through' : ''}>{item.d}</div>
-                        <div className="font-bold">{item.v}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+        {/* Scroll indicator */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/20 text-xs">
+          <span>Role para ver o dashboard</span>
+          <div className="w-5 h-8 border border-white/10 rounded-full flex items-start justify-center pt-1.5">
+            <div className="w-1 h-2 bg-white/30 rounded-full animate-bounce" />
           </div>
         </div>
       </section>
