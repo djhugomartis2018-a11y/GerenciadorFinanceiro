@@ -120,7 +120,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
       <ScrollShowcase />
 
       {/* Features Grid */}
-      <section id="recursos" className="py-32 px-4 relative">
+      <section id="recursos" className="pt-16 pb-32 px-4 relative">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-20 space-y-4">
             <div className="inline-block h-px w-12 bg-accent-purple mb-4" />

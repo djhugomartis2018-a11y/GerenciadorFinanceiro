@@ -15,12 +15,12 @@ function StatCard({
   label: string; value: string; color: string; Icon: React.ElementType;
 }) {
   return (
-    <div className="bg-[#111214] border border-white/5 rounded-2xl p-4 flex flex-col gap-3">
+    <div className="bg-[#1a1a1e] border border-white/10 rounded-2xl p-4 flex flex-col gap-3">
       <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${color}`}>
         <Icon size={14} />
       </div>
       <div>
-        <p className="text-[8px] font-black text-white/30 uppercase tracking-widest mb-0.5">{label}</p>
+        <p className="text-[8px] font-black text-white/50 uppercase tracking-widest mb-0.5">{label}</p>
         <p className="text-sm font-black text-white">{value}</p>
       </div>
     </div>
@@ -35,7 +35,7 @@ function MiniChart() {
       {bars.map((h, i) => (
         <div key={i} className="flex-1 flex flex-col-reverse">
           <div
-            className="bg-accent-purple/20 rounded-t-sm"
+            className="bg-accent-purple/35 rounded-t-sm"
             style={{ height: `${h}%` }}
           />
         </div>
@@ -66,17 +66,17 @@ function MiniChart() {
 
 function DashboardMockup() {
   return (
-    <div className="w-full h-full bg-[#0d0d0d] flex text-white overflow-hidden rounded-b-2xl select-none">
+    <div className="w-full h-full bg-[#111114] flex text-white overflow-hidden rounded-b-2xl select-none">
 
       {/* Sidebar */}
-      <div className="w-40 shrink-0 bg-[#111214] border-r border-white/5 flex flex-col py-4 px-3 gap-4">
-        <div className="flex flex-col items-center gap-2 pb-3 border-b border-white/5">
+      <div className="w-40 shrink-0 bg-[#161618] border-r border-white/10 flex flex-col py-4 px-3 gap-4">
+        <div className="flex flex-col items-center gap-2 pb-3 border-b border-white/10">
           <img src="/logobranca.svg" alt="NAVEX" className="w-12 h-12 drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]" />
         </div>
 
         {/* Menu */}
         <div className="space-y-0.5">
-          <p className="text-[7px] font-black text-white/20 tracking-widest uppercase px-2 mb-1">Menu</p>
+          <p className="text-[7px] font-black text-white/40 tracking-widest uppercase px-2 mb-1">Menu</p>
           {[
             { label: 'Painel Geral', icon: LayoutGrid, active: true },
             { label: 'Análises', icon: TrendingUp, active: false },
@@ -85,7 +85,7 @@ function DashboardMockup() {
             <div
               key={item.label}
               className={`flex items-center gap-2 px-2 py-1.5 rounded-lg text-[9px] font-bold ${
-                item.active ? 'bg-white/5 text-accent-purple' : 'text-white/30'
+                item.active ? 'bg-accent-purple/15 text-accent-purple' : 'text-white/45'
               }`}
             >
               <item.icon size={11} />
@@ -96,9 +96,9 @@ function DashboardMockup() {
 
         {/* Months */}
         <div className="space-y-0.5 flex-1">
-          <p className="text-[7px] font-black text-white/20 tracking-widest uppercase px-2 mb-1">Planejamento</p>
+          <p className="text-[7px] font-black text-white/40 tracking-widest uppercase px-2 mb-1">Planejamento</p>
           {['Jun/2025', 'Mai/2025', 'Abr/2025'].map((m) => (
-            <div key={m} className="flex items-center gap-2 px-2 py-1 rounded-lg text-[8px] text-white/30">
+            <div key={m} className="flex items-center gap-2 px-2 py-1 rounded-lg text-[8px] text-white/50">
               <Calendar size={9} />
               {m}
             </div>
@@ -106,9 +106,9 @@ function DashboardMockup() {
         </div>
 
         {/* Footer */}
-        <div className="border-t border-white/5 pt-3 space-y-2">
-          <div className="h-6 bg-white/5 border border-white/5 rounded-lg flex items-center px-2">
-            <span className="text-[7px] text-white/20 flex items-center gap-1">
+        <div className="border-t border-white/10 pt-3 space-y-2">
+          <div className="h-6 bg-white/5 border border-white/10 rounded-lg flex items-center px-2">
+            <span className="text-[7px] text-white/40 flex items-center gap-1">
               <Plus size={7} /> Novo mês
             </span>
           </div>
@@ -128,9 +128,9 @@ function DashboardMockup() {
       <div className="flex-1 flex flex-col overflow-hidden">
 
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-3 border-b border-white/5 bg-[#0d0d0d]/80">
+        <div className="flex items-center justify-between px-5 py-3 border-b border-white/10 bg-[#111114]/80">
           <div>
-            <p className="text-[8px] font-black text-white/30 uppercase tracking-widest">Painel Geral</p>
+            <p className="text-[8px] font-black text-white/50 uppercase tracking-widest">Painel Geral</p>
           </div>
           <button className="p-1 rounded-lg text-white/20">
             <LogOut size={10} />
@@ -151,9 +151,9 @@ function DashboardMockup() {
           {/* Charts row */}
           <div className="grid grid-cols-3 gap-2">
             {/* Main chart */}
-            <div className="col-span-2 bg-[#111214] border border-white/5 rounded-2xl p-3">
+            <div className="col-span-2 bg-[#1a1a1e] border border-white/10 rounded-2xl p-3">
               <div className="flex justify-between items-center mb-2">
-                <p className="text-[9px] font-bold text-white/70">Evolução Financeira</p>
+                <p className="text-[9px] font-bold text-white/80">Evolução Financeira</p>
                 <div className="flex gap-2 text-[7px] font-bold">
                   <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-accent-purple inline-block" /> Entradas</span>
                   <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-red-500 inline-block" /> Saídas</span>
@@ -163,19 +163,19 @@ function DashboardMockup() {
             </div>
 
             {/* Recent months */}
-            <div className="bg-[#111214] border border-white/5 rounded-2xl p-3">
-              <p className="text-[9px] font-bold text-white/70 mb-2">Meses Recentes</p>
+            <div className="bg-[#1a1a1e] border border-white/10 rounded-2xl p-3">
+              <p className="text-[9px] font-bold text-white/80 mb-2">Meses Recentes</p>
               <div className="space-y-1.5">
                 {[
                   { mes: 'Jun/2025', saldo: 'R$ 1.800' },
                   { mes: 'Mai/2025', saldo: 'R$ 2.100' },
                   { mes: 'Abr/2025', saldo: 'R$ 1.560' },
                 ].map((m) => (
-                  <div key={m.mes} className="flex items-center justify-between p-1.5 rounded-lg bg-[#0d0d0d] border border-white/5">
-                    <p className="text-[8px] font-bold">{m.mes}</p>
+                  <div key={m.mes} className="flex items-center justify-between p-1.5 rounded-lg bg-[#111114] border border-white/10">
+                    <p className="text-[8px] font-bold text-white/70">{m.mes}</p>
                     <div className="flex items-center gap-1">
                       <p className="text-[7px] text-accent-purple font-bold">{m.saldo}</p>
-                      <ChevronRight size={8} className="text-white/20" />
+                      <ChevronRight size={8} className="text-white/30" />
                     </div>
                   </div>
                 ))}
@@ -184,10 +184,10 @@ function DashboardMockup() {
           </div>
 
           {/* Pending bills */}
-          <div className="bg-[#111214] border border-white/5 rounded-2xl overflow-hidden">
-            <div className="px-3 py-2 border-b border-white/5 flex items-center gap-1.5">
+          <div className="bg-[#1a1a1e] border border-white/10 rounded-2xl overflow-hidden">
+            <div className="px-3 py-2 border-b border-white/10 flex items-center gap-1.5">
               <div className="w-1.5 h-1.5 rounded-full bg-accent-purple animate-pulse" />
-              <p className="text-[8px] font-black text-white/50 uppercase tracking-widest">Contas Pendentes</p>
+              <p className="text-[8px] font-black text-white/60 uppercase tracking-widest">Contas Pendentes</p>
             </div>
             <div className="divide-y divide-white/5">
               {[
@@ -195,11 +195,11 @@ function DashboardMockup() {
                 { desc: 'Energia Elétrica', val: 'R$ 245,50', dia: 'Dia 10', pago: true },
                 { desc: 'Internet', val: 'R$ 109,90', dia: 'Dia 10', pago: true },
               ].map((bill) => (
-                <div key={bill.desc} className={`flex items-center justify-between px-3 py-1.5 ${bill.pago ? 'opacity-40' : ''}`}>
-                  <p className={`text-[8px] font-medium ${bill.pago ? 'line-through' : 'text-white/80'}`}>{bill.desc}</p>
+                <div key={bill.desc} className={`flex items-center justify-between px-3 py-1.5 ${bill.pago ? 'opacity-50' : ''}`}>
+                  <p className={`text-[8px] font-medium ${bill.pago ? 'line-through text-white/40' : 'text-white/85'}`}>{bill.desc}</p>
                   <div className="flex items-center gap-3">
-                    <p className="text-[7px] text-white/30">{bill.dia}</p>
-                    <p className={`text-[8px] font-bold ${bill.pago ? 'line-through text-white/30' : 'text-red-400'}`}>{bill.val}</p>
+                    <p className="text-[7px] text-white/40">{bill.dia}</p>
+                    <p className={`text-[8px] font-bold ${bill.pago ? 'line-through text-white/35' : 'text-red-400'}`}>{bill.val}</p>
                     <div className={`w-3 h-3 rounded border ${bill.pago ? 'bg-accent-purple border-accent-purple' : 'border-white/20'}`} />
                   </div>
                 </div>
@@ -216,24 +216,24 @@ function DashboardMockup() {
 
 function BrowserFrame({ children }: { children: React.ReactNode }) {
   return (
-    <div className="w-full rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-black/60">
+    <div className="w-full rounded-2xl overflow-hidden border border-white/15 shadow-[0_0_80px_rgba(139,92,246,0.15),0_40px_80px_rgba(0,0,0,0.7)]">
       {/* Browser chrome */}
-      <div className="bg-[#1a1a1e] border-b border-white/5 px-4 py-2.5 flex items-center gap-3">
+      <div className="bg-[#1c1c20] border-b border-white/10 px-4 py-3 flex items-center gap-3">
         {/* Traffic lights */}
         <div className="flex items-center gap-1.5">
-          <div className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
-          <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
-          <div className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
+          <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+          <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
+          <div className="w-3 h-3 rounded-full bg-[#28c840]" />
         </div>
         {/* URL bar */}
-        <div className="flex-1 mx-4 bg-white/5 border border-white/5 rounded-lg py-1 px-3 flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-green-400/60" />
-          <span className="text-[10px] text-white/30 font-medium">gerenciadorfinanceiro-chi.vercel.app</span>
+        <div className="flex-1 mx-4 bg-white/5 border border-white/10 rounded-lg py-1.5 px-3 flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-green-400/70" />
+          <span className="text-[10px] text-white/45 font-medium">navexfinance.vercel.app</span>
         </div>
         {/* Controls */}
         <div className="flex gap-1">
           {[...Array(3)].map((_, i) => (
-            <div key={i} className="w-3 h-3 rounded bg-white/5" />
+            <div key={i} className="w-3 h-3 rounded bg-white/8" />
           ))}
         </div>
       </div>
@@ -255,30 +255,30 @@ export function ScrollShowcase() {
     offset: ['start start', 'end end'],
   });
 
-  // Headline sai rapidamente
-  const headlineY = useTransform(scrollYProgress, [0, 0.3], [0, -60]);
-  const headlineOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+  // Headline sai suavemente
+  const headlineY = useTransform(scrollYProgress, [0, 0.25], [0, -50]);
+  const headlineOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
-  // Frame: começa grande e visível, sobe levemente ao scrollar
-  const frameScale = useTransform(scrollYProgress, [0, 0.6], [0.9, 1.0]);
-  const frameY = useTransform(scrollYProgress, [0, 0.6], [24, 0]);
-  const frameOpacity = useTransform(scrollYProgress, [0, 0.08], [0, 1]);
+  // Frame: visível desde o início, escala e sobe suavemente
+  const frameScale = useTransform(scrollYProgress, [0, 0.5], [0.85, 1.0]);
+  const frameY = useTransform(scrollYProgress, [0, 0.5], [40, 0]);
+  const frameOpacity = useTransform(scrollYProgress, [0, 0.06], [0.75, 1]);
 
   // Floating badges aparecem na segunda metade
-  const floatOpacity = useTransform(scrollYProgress, [0.45, 0.7], [0, 1]);
-  const floatY = useTransform(scrollYProgress, [0.45, 0.7], [16, 0]);
+  const floatOpacity = useTransform(scrollYProgress, [0.4, 0.65], [0, 1]);
+  const floatY = useTransform(scrollYProgress, [0.4, 0.65], [16, 0]);
 
   return (
     <section
       ref={containerRef}
-      className="relative h-[180vh] bg-[#0d0d0d]"
+      className="relative h-[280vh] bg-[#0d0d0d]"
     >
       {/* Sticky viewport */}
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
 
         {/* Background glow */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-accent-purple/8 rounded-full blur-[100px]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[500px] bg-accent-purple/15 rounded-full blur-[120px]" />
         </div>
 
         {/* Headline */}
@@ -314,7 +314,7 @@ export function ScrollShowcase() {
             y: frameY,
             opacity: frameOpacity,
           }}
-          className="w-full max-w-6xl mx-auto px-4 relative z-10"
+          className="w-full max-w-[1200px] mx-auto px-4 relative z-10"
         >
           <BrowserFrame>
             <DashboardMockup />
