@@ -304,7 +304,12 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
       {/* Pricing Section */}
       <section id="precos" className="relative py-32 px-4 bg-white/[0.01] border-y border-white/5">
         <PricingSection
-          onSelectPlan={() => onGetStarted()}
+          onSelectPlan={(plan, cycle) => {
+            if (plan !== 'basic') {
+              localStorage.setItem('navex_pending_plan', JSON.stringify({ plan, cycle }));
+            }
+            onGetStarted();
+          }}
         />
       </section>
 

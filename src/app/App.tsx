@@ -437,6 +437,14 @@ export default function App() {
           onLoginSuccess={async () => {
             const { data: { session: newSession } } = await supabase.auth.getSession();
             setSession(newSession);
+            const raw = localStorage.getItem('navex_pending_plan');
+            if (raw) {
+              localStorage.removeItem('navex_pending_plan');
+              try {
+                const { plan: p, cycle: c } = JSON.parse(raw);
+                if (p && p !== 'basic') subscribe(p, c);
+              } catch {}
+            }
           }}
         />
         <Toaster richColors position="top-right" />
