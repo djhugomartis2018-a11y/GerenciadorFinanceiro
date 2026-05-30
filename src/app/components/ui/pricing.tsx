@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Check } from "lucide-react";
 import { Plan } from "../../../lib/plans";
 import { PRICING, getYearlySavings, BillingCycle } from "../../../lib/pricingConfig";
@@ -43,13 +43,15 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps = {}) {
     {
       key: 'essential',
       name: "Essencial",
-      description: "Para acompanhar suas finanças continuamente",
+      description: "Para quem quer análise e controle real",
       features: [
         "Meses ilimitados",
-        "Categorias personalizadas",
-        "Histórico contínuo",
-        "Planejamento mensal",
+        "Score Financeiro pessoal (0–1000)",
         "Comparação de gastos entre meses",
+        "Categorias personalizadas",
+        "Tendências de gastos mensais",
+        "Exportação em PDF",
+        "Histórico contínuo",
         "Resumo mensal detalhado",
       ],
       note: null,
@@ -59,14 +61,16 @@ export function PricingSection({ onSelectPlan }: PricingSectionProps = {}) {
     {
       key: 'pro',
       name: "Pro",
-      description: "Para organização financeira avançada",
+      description: "Seu assistente financeiro inteligente",
       features: [
         "Tudo do Essencial",
-        "Comparação avançada entre períodos",
-        "Orçamento por categoria",
-        "Metas financeiras",
-        "Templates mensais",
+        "Insights com Inteligência Artificial",
+        "Previsão de gastos do próximo mês",
+        "Alertas de orçamento por categoria",
+        "Metas financeiras avançadas",
+        "Exportação Excel / CSV",
         "Visão anual consolidada",
+        "Gamificação e conquistas",
       ],
       note: null,
       cta: "Começar com Pro",
