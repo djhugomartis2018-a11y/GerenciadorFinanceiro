@@ -1,8 +1,6 @@
 import { ChevronRight, TrendingUp, Target, Wallet, BarChart3, ArrowRight, Sparkles, Smartphone, LayoutGrid, User, ArrowUpCircle, ArrowDownCircle, Calendar } from 'lucide-react';
 import { Button } from '../ui/button';
 import { PricingSection } from '../ui/pricing';
-import { SplineHero } from './SplineHero';
-
 interface LandingPageProps {
   onGetStarted: () => void;
 }
@@ -52,13 +50,8 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </nav>
 
-      {/* Hero Section — Spline Robot */}
-      <div className="mt-0">
-        <SplineHero onGetStarted={onGetStarted} />
-      </div>
-
-      {/* Old Hero Section (hidden — preserved as dashboard mockup below fold) */}
-      <section className="hidden relative pt-44 pb-20 px-4">
+      {/* Hero Section */}
+      <section className="relative pt-44 pb-20 px-4">
         <div className="max-w-5xl mx-auto text-center space-y-8">
           {/* Top Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
